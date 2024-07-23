@@ -35,3 +35,6 @@ alias ping="ping -c 5"
 
 # Make vim neovim
 alias vim="nvim"
+
+# fzf nvim
+alias vifzf='selected_file=$(fzf --preview="bat --color=always {}"); [[ -n "$selected_file" ]] && nvim "$selected_file"'
