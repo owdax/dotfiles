@@ -25,10 +25,17 @@
 ln -sf ~/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -sf ~/dotfiles/.zsh_aliases ~/.zsh_aliases
+ln -sf ~/dotfiles/.gitconfig ~/.gitconfig
+ln -sf ~/dotfiles/.gitignore_global ~/.gitignore_global
+
+# Link nvim config directory
+ln -sf ~/dotfiles/nvim ~/.config/nvim
 
 # Reload shell
 source ~/.zshrc
 ```
+
+**Note:** Update your name and email in `.gitconfig` before using.
 
 ### Tmux Plugin Manager (TPM)
 ```bash

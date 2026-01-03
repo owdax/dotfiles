@@ -1,0 +1,106 @@
+[user]
+	# Update with your information
+	name = owdax
+	email = omid.dolatkia@gmail.com
+
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = false
+
+[push]
+	default = simple
+	followTags = true
+
+[fetch]
+	prune = true
+
+[diff]
+	tool = nvimdiff
+	colorMoved = zebra
+
+[merge]
+	tool = nvimdiff
+	conflictstyle = diff3
+
+[color]
+	ui = auto
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+[alias]
+	# Basic shortcuts
+	st = status
+	co = checkout
+	br = branch
+	ci = commit
+	
+	# Amend the currently staged files to the latest commit
+	amend = commit --amend --reuse-message=HEAD
+	
+	# Pretty log
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	
+	# Show verbose output about tags, branches or remotes
+	tags = tag -l
+	branches = branch -a
+	remotes = remote -v
+	
+	# List contributors with number of commits
+	contributors = shortlog --summary --numbered
+	
+	# Undo last commit but keep changes
+	undo = reset HEAD~1 --mixed
+	
+	# Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+	
+	# Pull in remote changes for the current repository and all its submodules
+	p = !"git pull; git submodule foreach git pull origin main"
+	
+	# Clone a repository including all submodules
+	c = clone --recursive
+	
+	# Commit all changes
+	ca = !git add -A && git commit -av
+	
+	# Switch to a branch, creating it if necessary
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+	
+	# Interactive rebase with the given number of latest commits
+	reb = "!r() { git rebase -i HEAD~$1; }; r"
+	
+	# Find branches containing commit
+	fb = "!f() { git branch -a --contains $1; }; f"
+	
+	# Find commits by source code
+	fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+	
+	# Find commits by commit message
+	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+[help]
+	# Automatically correct and execute mistyped commands
+	autocorrect = 1
