@@ -118,6 +118,8 @@ source $ZSH/oh-my-zsh.sh
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
+source ~/.zsh_aliases
+
 export TOOLCHAIN_PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain"
 export PATH="$TOOLCHAIN_PATH/usr/bin/sourcekit-lsp:$PATH"
 
@@ -130,3 +132,16 @@ eval "$(pyenv init -)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# Start SSH agent and add keys
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval "$(ssh-agent -s)" > /dev/null
+fi
+# Add your SSH key - Update path to your key: ~/.ssh/your_key_name
+ssh-add -l &>/dev/null || ssh-add --apple-use-keychain ~/.ssh/owdax_github &>/dev/null
+
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+# Created by pipx - Update username in path: /Users/username/.local/bin
+export PATH="$PATH:/Users/omid/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
