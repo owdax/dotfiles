@@ -2,7 +2,7 @@
 # Press | inside lazygit to cycle between the configured diff renderers.
 git:
   diffRenderers:
-    - command: delta --dark --paging=never --side-by-side --line-numbers --width={{columnWidth}}
+    - command: delta --dark --paging=never --side-by-side --line-numbers
       name: delta side-by-side
     - command: delta --dark --paging=never --line-numbers
       name: delta
