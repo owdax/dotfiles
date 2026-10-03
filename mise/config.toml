@@ -1,0 +1,13 @@
+# Global mise config (~/.config/mise/config.toml).
+#
+# No global tool versions on purpose: Homebrew's node/python/ruby stay the
+# defaults, and mise only switches versions inside projects that pin one.
+
+[settings]
+# Also honour the version files other managers use, so projects that ship a
+# .nvmrc / .node-version, .python-version or .ruby-version just work.
+idiomatic_version_file_enable_tools = ["node", "python", "ruby"]
+
+# Keep mise's shim dir off PATH. Outside a pinned project, `node` & co. should
+# be Homebrew's binaries directly, not a shim that falls back to them.
+activate_shims = false

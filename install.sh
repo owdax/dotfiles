@@ -30,6 +30,7 @@ LINKS=(
   "nvim|$HOME/.config/nvim"
   "herdr/config.toml|$HOME/.config/herdr/config.toml"
   "yazi/yazi.toml|$HOME/.config/yazi/yazi.toml"
+  "mise/config.toml|$HOME/.config/mise/config.toml"
   "ghostty/config|$APP_SUPPORT/com.mitchellh.ghostty/config"
   "lazygit/config.yml|$APP_SUPPORT/lazygit/config.yml"
   "claude/statusline.sh|$HOME/.claude/statusline.sh"
