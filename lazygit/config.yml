@@ -1,11 +1,13 @@
 # Diff pane: use delta for syntax highlighting, line numbers and side-by-side.
-# Press | inside lazygit to cycle between the configured pagers.
+# Press | inside lazygit to cycle between the configured diff renderers.
 git:
   diffRenderers:
-    - command: delta --dark --paging=never --side-by-side --line-numbers
+    - command: delta --dark --paging=never --side-by-side --line-numbers --width={{columnWidth}}
+      name: delta side-by-side
     - command: delta --dark --paging=never --line-numbers
-    - type: rawGit
-gui: # plain git diff
+      name: delta
+    - type: rawGit # plain git diff
+gui:
   # narrower side panel gives the side-by-side diff more room
   sidePanelWidth: 0.25
   nerdFontsVersion: "3"
