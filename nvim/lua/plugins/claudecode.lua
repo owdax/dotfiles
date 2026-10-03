@@ -9,7 +9,7 @@ return {
             port_range = { min = 10000, max = 65535 },
             auto_start = true,
             log_level = "info", -- "trace", "debug", "info", "warn", "error"
-            -- Wrapper script to fix iTerm2 underlines in Neovim terminal
+            -- Wrapper hides the outer terminal from Claude (see the script)
             terminal_cmd = vim.fn.stdpath("config") .. "/scripts/claude-wrapper.sh",
 
             -- Selection Tracking (sends current selection context to Claude)

@@ -70,7 +70,6 @@ brew 'uv'
 cask 'docker-desktop'
 cask 'ghostty'
 cask 'visual-studio-code'
-cask 'iterm2'
 cask 'ngrok'
 
 # Apps
