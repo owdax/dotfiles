@@ -28,6 +28,7 @@ brew 'jq'
 brew 'teamookla/speedtest/speedtest'
 brew 'yt-dlp'
 brew 'tree-sitter'
+brew 'tree-sitter-cli'   # nvim-treesitter builds parsers with it
 brew 'ipsw'
 brew 'circumflex'
 
