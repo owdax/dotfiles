@@ -7,72 +7,57 @@
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
 
-2. **Clone & Install**
+2. **Clone, install packages, link configs**
    ```bash
-   # Clone repository
+   # Clone anywhere; install.sh links relative to wherever the repo lives
    git clone https://github.com/owdax/dotfiles.git
    cd dotfiles
 
-   # Install everything
-   brew bundle install
+   brew bundle install   # tools, apps, zsh theme and plugins
+   ./install.sh          # oh-my-zsh + TPM, then symlink every config
+   exec zsh
    ```
 
-## Additional Setup
+`./install.sh --dry-run` shows what it would do without changing anything.
+It is safe to re-run: links that already point at the repo are left alone,
+and anything in the way is moved to `~/.dotfiles-backup-<timestamp>/`.
 
-### Symlink Dotfiles
-```bash
-# Link configuration files
-ln -sf ~/dotfiles/.zshrc ~/.zshrc
-ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
-ln -sf ~/dotfiles/.zsh_aliases ~/.zsh_aliases
-ln -sf ~/dotfiles/.gitconfig ~/.gitconfig
-ln -sf ~/dotfiles/.gitignore_global ~/.gitignore_global
+## What gets linked
 
-# Link nvim config directory
-ln -sf ~/dotfiles/nvim ~/.config/nvim
+| Repo path | Target |
+|---|---|
+| `.zshrc`, `.zsh_aliases`, `.p10k.zsh` | `~/` |
+| `.tmux.conf`, `.gitconfig`, `.gitignore_global` | `~/` |
+| `nvim/` | `~/.config/nvim` |
+| `herdr/config.toml` | `~/.config/herdr/config.toml` |
+| `yazi/yazi.toml` | `~/.config/yazi/yazi.toml` |
+| `ghostty/config` | `~/Library/Application Support/com.mitchellh.ghostty/config` |
+| `lazygit/config.yml` | `~/Library/Application Support/lazygit/config.yml` |
+| `claude/statusline.sh` | `~/.claude/statusline.sh` |
 
-# Link herdr config
-mkdir -p ~/.config/herdr
-ln -sf ~/dotfiles/herdr/config.toml ~/.config/herdr/config.toml
+To add a config, put it in the repo and add a line to `LINKS` in `install.sh`.
 
-# Link Ghostty config
-mkdir -p ~/Library/Application\ Support/com.mitchellh.ghostty
-ln -sf ~/dotfiles/ghostty/config ~/Library/Application\ Support/com.mitchellh.ghostty/config
-
-# Link yazi config
-mkdir -p ~/.config/yazi
-ln -sf ~/dotfiles/yazi/yazi.toml ~/.config/yazi/yazi.toml
-
-# Link lazygit config
-mkdir -p ~/Library/Application\ Support/lazygit
-ln -sf ~/dotfiles/lazygit/config.yml ~/Library/Application\ Support/lazygit/config.yml
-
-# Link Claude Code status line (needs jq + a Nerd Font)
-mkdir -p ~/.claude
-ln -sf ~/dotfiles/claude/statusline.sh ~/.claude/statusline.sh
-# then add to ~/.claude/settings.json:
-#   "statusLine": { "type": "command", "command": "~/.claude/statusline.sh" }
-
-# Reload shell
-source ~/.zshrc
-```
+## After installing
 
 **Note:** Update your name and email in `.gitconfig` before using.
 
-### Tmux Plugin Manager (TPM)
-```bash
-# Install TPM
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+### Tmux plugins
+`install.sh` clones TPM. Start `tmux` and press `Ctrl+a` then `I` (capital i) to install the plugins.
 
-# Start tmux and install plugins
-tmux
-# Press: Ctrl+a + I (capital i) to install plugins
+### Neovim nightly
+The `vim` alias runs `nvim-nightly`. Install it (and update it later) with:
+```bash
+nvim/scripts/nvim-nightly-update.sh
+```
+
+### Claude Code status line
+Needs `jq` and a Nerd Font (both in the Brewfile). Add to `~/.claude/settings.json`:
+```json
+"statusLine": { "type": "command", "command": "~/.claude/statusline.sh" }
 ```
 
 ### macOS Settings
 ```bash
-# Apply macOS configurations (optional)
-cd ~/dotfiles
-chmod +x .macos
-./.macos
+# Apply macOS configurations (optional; read it first, it uses sudo)
+bash .macos
 ```
