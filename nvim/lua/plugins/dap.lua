@@ -5,10 +5,8 @@ return {
     },
     config = function()
       local xcodebuild = require("xcodebuild.integrations.dap")
-      -- SAMPLE PATH, change it to your local codelldb path
-      local codelldbPath = os.getenv("HOME") .. "/tools/codelldb-aarch64-darwin/extension/adapter/codelldb"
-  
-      xcodebuild.setup(codelldbPath)
+      -- Xcode 16+ ships lldb-dap, so codelldb is no longer needed.
+      xcodebuild.setup()
   
       vim.keymap.set("n", "<leader>dd", xcodebuild.build_and_debug, { desc = "Build & Debug" })
       vim.keymap.set("n", "<leader>dr", xcodebuild.debug_without_build, { desc = "Debug Without Building" })
