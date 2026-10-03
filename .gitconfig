@@ -102,5 +102,6 @@
 	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
 [help]
-	# Automatically correct and execute mistyped commands
-	autocorrect = 1
+	# On a mistyped command, suggest the likely one and ask before running it
+	# (a number here would run the guess after that many 0.1s, unasked).
+	autocorrect = prompt
