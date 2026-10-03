@@ -40,3 +40,16 @@ alias vifzf='selected_file=$(fzf --preview="bat --color=always {}"); [[ -n "$sel
 
 # Lazygit
 alias laz="lazygit"
+
+# >>> yazi >>>
+# `y` wraps yazi so quitting leaves the shell in the directory you browsed to.
+# yazi writes its final cwd to a temp file; this function (running in the shell,
+# not a child process) reads it and cd's there.
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+# <<< yazi <<<

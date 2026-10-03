@@ -1,0 +1,6 @@
+# Yazi config. Partial files are layered over the built-in defaults,
+# so only the options that differ need to be listed here.
+
+[mgr]
+# Finder-like: interleave folders with files rather than grouping folders first.
+sort_dir_first = false
