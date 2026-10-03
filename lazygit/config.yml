@@ -1,0 +1,17 @@
+# Diff pane: use delta for syntax highlighting, line numbers and side-by-side.
+# Press | inside lazygit to cycle between the configured pagers.
+git:
+  diffRenderers:
+    - command: delta --dark --paging=never --side-by-side --line-numbers
+    - command: delta --dark --paging=never --line-numbers
+    - type: rawGit
+gui: # plain git diff
+  # narrower side panel gives the side-by-side diff more room
+  sidePanelWidth: 0.25
+  nerdFontsVersion: "3"
+  # status panel shows the branch graph instead of the logo
+  statusPanelView: allBranchesLog
+  commitHashLength: 7
+os:
+  # `e` on a file opens it in Neovim at the right line
+  editPreset: nvim
