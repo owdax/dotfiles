@@ -31,6 +31,22 @@ ln -sf ~/dotfiles/.gitignore_global ~/.gitignore_global
 # Link nvim config directory
 ln -sf ~/dotfiles/nvim ~/.config/nvim
 
+# Link herdr config
+mkdir -p ~/.config/herdr
+ln -sf ~/dotfiles/herdr/config.toml ~/.config/herdr/config.toml
+
+# Link Ghostty config
+mkdir -p ~/Library/Application\ Support/com.mitchellh.ghostty
+ln -sf ~/dotfiles/ghostty/config ~/Library/Application\ Support/com.mitchellh.ghostty/config
+
+# Link yazi config
+mkdir -p ~/.config/yazi
+ln -sf ~/dotfiles/yazi/yazi.toml ~/.config/yazi/yazi.toml
+
+# Link lazygit config
+mkdir -p ~/Library/Application\ Support/lazygit
+ln -sf ~/dotfiles/lazygit/config.yml ~/Library/Application\ Support/lazygit/config.yml
+
 # Reload shell
 source ~/.zshrc
 ```
