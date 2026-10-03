@@ -1,6 +1,3 @@
-# Path to your dotfiles.
-export DOTFILES=$HOME/.dotfiles
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -11,6 +8,15 @@ fi
 # Keep PATH free of duplicates: later prepends of an existing entry just move it to the front.
 typeset -U path PATH
 
+# Homebrew env (PATH, HOMEBREW_PREFIX). ~/.zprofile usually does this for login
+# shells; do it here too so non-login shells and fresh machines don't depend on it.
+if [[ -z $HOMEBREW_PREFIX ]]; then
+  for brew_bin in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    [[ -x $brew_bin ]] && eval "$($brew_bin shellenv)" && break
+  done
+  unset brew_bin
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -18,7 +24,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# Theme and plugins come from Homebrew (see Brewfile) and are sourced below,
+# so oh-my-zsh loads no theme of its own.
+ZSH_THEME=""
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -72,19 +80,16 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=$DOTFILES
-
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-zsh-autosuggestions
-zsh-syntax-highlighting
-)
+plugins=()
 source $ZSH/oh-my-zsh.sh
+
+source "$HOMEBREW_PREFIX/share/powerlevel10k/powerlevel10k.zsh-theme"
+source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # User configuration
 
@@ -126,10 +131,9 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
 
-# nvm from Homebrew. HOMEBREW_PREFIX is set by `brew shellenv` in ~/.zprofile
-# (/opt/homebrew on Apple Silicon, /usr/local on Intel).
+# nvm from Homebrew (/opt/homebrew on Apple Silicon, /usr/local on Intel).
 export NVM_DIR="$HOME/.nvm"
-NVM_HOME="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/nvm"
+NVM_HOME="$HOMEBREW_PREFIX/opt/nvm"
 [ -s "$NVM_HOME/nvm.sh" ] && \. "$NVM_HOME/nvm.sh"
 [ -s "$NVM_HOME/etc/bash_completion.d/nvm" ] && \. "$NVM_HOME/etc/bash_completion.d/nvm"
 unset NVM_HOME
@@ -145,3 +149,6 @@ export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 # User-level binaries (pipx, herdr, ...).
 export PATH="$HOME/.local/bin:$PATH"
+
+# Must be sourced last: it wraps every widget defined before it.
+source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
