@@ -47,6 +47,12 @@ ln -sf ~/dotfiles/yazi/yazi.toml ~/.config/yazi/yazi.toml
 mkdir -p ~/Library/Application\ Support/lazygit
 ln -sf ~/dotfiles/lazygit/config.yml ~/Library/Application\ Support/lazygit/config.yml
 
+# Link Claude Code status line (needs jq + a Nerd Font)
+mkdir -p ~/.claude
+ln -sf ~/dotfiles/claude/statusline.sh ~/.claude/statusline.sh
+# then add to ~/.claude/settings.json:
+#   "statusLine": { "type": "command", "command": "~/.claude/statusline.sh" }
+
 # Reload shell
 source ~/.zshrc
 ```
