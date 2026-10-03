@@ -125,19 +125,6 @@ source <(fzf --zsh)
 
 source ~/.zsh_aliases
 
-# pyenv itself comes from Homebrew; init adds the shims dir to PATH.
-export PYENV_ROOT="$HOME/.pyenv"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-
-
-# nvm from Homebrew (/opt/homebrew on Apple Silicon, /usr/local on Intel).
-export NVM_DIR="$HOME/.nvm"
-NVM_HOME="$HOMEBREW_PREFIX/opt/nvm"
-[ -s "$NVM_HOME/nvm.sh" ] && \. "$NVM_HOME/nvm.sh"
-[ -s "$NVM_HOME/etc/bash_completion.d/nvm" ] && \. "$NVM_HOME/etc/bash_completion.d/nvm"
-unset NVM_HOME
-
 # mise: per-project runtime versions (mise.toml, .nvmrc, .python-version, ...).
 # Activated after other PATH setup so a project's pinned version wins.
 command -v mise >/dev/null && eval "$(mise activate zsh)"
