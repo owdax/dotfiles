@@ -1,0 +1,111 @@
+onboarding = false
+# herdr configuration
+#
+# Keybindings and behavior ported from ~/.tmux.conf (2026-08-10).
+# Anything in tmux.conf that has no herdr equivalent is listed at the bottom.
+# Apply changes to a running server with: herdr server reload-config
+
+[theme]
+# 0x96f is not a built-in herdr theme, so it is ported below as token
+# overrides. catppuccin is the base because herdr's token vocabulary
+# (surface0/overlay0/mauve/peach/teal) is modeled on it, so anything not
+# overridable lands closest to the intended shape.
+# Was "terminal" (follow Ghostty's ANSI palette) — restore that to undo.
+name = "tokyo-night"
+auto_switch = false
+
+# 0x96f, ported from Ghostty's bundled theme:
+# /Applications/Ghostty.app/Contents/Resources/ghostty/themes/0x96f
+[theme.custom]
+# Direct from the palette.
+panel_bg = "#262427"   # background
+text     = "#fcfcfa"   # foreground
+red      = "#ff666d"   # palette 1
+green    = "#b3e03a"   # palette 2
+yellow   = "#ffc739"   # palette 3
+blue     = "#00cde8"   # palette 4
+mauve    = "#a392e8"   # palette 5  (magenta)
+teal     = "#9deaf6"   # palette 6  (cyan)
+overlay0 = "#545452"   # palette 8  (bright black)
+accent   = "#00cde8"   # the scheme's signature cyan
+
+# Derived — 0x96f is a 16-color ANSI scheme and has no slot for these UI
+# roles. Each is mixed from palette colors, not invented from scratch.
+surface_dim = "#1c1a1d"  # one step under panel_bg
+surface0    = "#322f33"  # raised panel
+surface1    = "#3f3b40"  # raised panel, one step further
+overlay1    = "#6e6e6c"  # overlay0 lightened
+subtext0    = "#abaaaa"  # text/panel_bg blend; palette 8 is too dark to read here
+peach       = "#ff9653"  # red+yellow mix; 0x96f has no orange, and reusing
+                         # bright yellow/red would collide with warn/error
+
+[keys]
+# tmux: set -g prefix C-a
+prefix = "ctrl+a"
+
+# tmux: bind r source-file ~/.tmux.conf
+# herdr ships reload_config on prefix+shift+r and resize_mode on prefix+r.
+# Swapped so prefix+r reloads config the way it does in tmux; resize_mode
+# takes over the freed prefix+shift+r.
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
+
+# tmux: bind-key h/j/k/l select-pane -L/-D/-U/-R
+# (Same as herdr's defaults; kept explicit so the mapping is visible.)
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# tmux: bind-key v split-window -h   (v = side by side)
+# tmux: bind-key s split-window -v   (s = stacked)
+# herdr names these vertical/horizontal by the divider, vim/zellij style:
+# split_vertical = side-by-side, split_horizontal = stacked.
+# If they come out reversed in practice, swap these two values.
+split_vertical = "prefix+v"
+split_horizontal = "prefix+s"
+
+# prefix+s is herdr's default `settings` binding, freed above so `s` can split
+# like it does in tmux. Settings moves to the unused prefix+shift+s.
+settings = "prefix+shift+s"
+
+[ui]
+# tmux: set -g mouse on
+mouse_capture = true
+
+# tmux: set -g set-clipboard on + tmux-plugins/tmux-yank
+copy_on_select = true
+
+agent_panel_sort = "priority"
+[session]
+# tmux-resurrect + tmux-continuum (@continuum-restore 'on') equivalent.
+# herdr persists sessions natively; this also resumes agent panes into their
+# own conversation sessions after a server restart.
+resume_agents_on_restore = true
+
+[advanced]
+# tmux: set -g history-limit 50000
+# herdr caps scrollback by bytes, not lines. The 10 MB default is already
+# roughly 50k lines at this terminal width, so it is left at the default.
+# Raise it here if long build/test logs still get truncated.
+# scrollback_limit_bytes = 10000000
+
+# ---------------------------------------------------------------------------
+# tmux settings with no herdr counterpart (deliberately not ported):
+#
+#   default-terminal / terminal-features / allow-passthrough
+#       herdr renders its own terminal and negotiates host capabilities
+#       (truecolor, hyperlinks, undercurl, clipboard, graphics) itself.
+#   escape-time 0 / focus-events on / aggressive-resize on / display-time
+#       Internal to tmux's input and layout handling; no exposed knob.
+#   base-index 1 / pane-base-index 1 / renumber-windows on
+#       herdr tabs are already 1-indexed (switch_tab = prefix+1..9) and
+#       renumber on close.
+#   mode-keys vi
+#       herdr's navigate/copy mode already moves with h/j/k/l.
+#   christoomey/vim-tmux-navigator
+#       No equivalent. It works in tmux by detecting whether vim owns the
+#       pane; herdr grabs keys at the client layer, so binding bare
+#       ctrl+h/j/k/l here would steal them from vim inside the pane.
+#       Pane navigation stays on prefix+h/j/k/l above.
+# ---------------------------------------------------------------------------
