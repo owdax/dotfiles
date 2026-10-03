@@ -8,8 +8,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Keep PATH free of duplicates: later prepends of an existing entry just move it to the front.
+typeset -U path PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -120,11 +120,8 @@ source <(fzf --zsh)
 
 source ~/.zsh_aliases
 
-export TOOLCHAIN_PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain"
-export PATH="$TOOLCHAIN_PATH/usr/bin/sourcekit-lsp:$PATH"
-
+# pyenv itself comes from Homebrew; init adds the shims dir to PATH.
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
@@ -142,6 +139,5 @@ ssh-add -l &>/dev/null || ssh-add --apple-use-keychain ~/.ssh/owdax_github &>/de
 
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
-# Created by pipx - Update username in path: /Users/username/.local/bin
-export PATH="$PATH:/Users/omid/.local/bin"
+# User-level binaries (pipx, herdr, ...).
 export PATH="$HOME/.local/bin:$PATH"
