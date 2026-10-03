@@ -126,9 +126,13 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
 
+# nvm from Homebrew. HOMEBREW_PREFIX is set by `brew shellenv` in ~/.zprofile
+# (/opt/homebrew on Apple Silicon, /usr/local on Intel).
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+NVM_HOME="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/nvm"
+[ -s "$NVM_HOME/nvm.sh" ] && \. "$NVM_HOME/nvm.sh"
+[ -s "$NVM_HOME/etc/bash_completion.d/nvm" ] && \. "$NVM_HOME/etc/bash_completion.d/nvm"
+unset NVM_HOME
 
 # Start SSH agent and add keys
 if [ -z "$SSH_AUTH_SOCK" ]; then
