@@ -70,3 +70,7 @@ window-padding-balance = true
 # Do NOT use window-width/window-height here: overriding those triggers a
 # self-resize on new tab (https://github.com/ghostty-org/ghostty/issues/11313).
 maximize = true
+
+# Close tabs/windows (and quit) without the "process still running" prompt,
+# like iTerm2's PromptOnQuit=false in the old .macos.
+confirm-close-surface = false
