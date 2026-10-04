@@ -59,9 +59,9 @@ cursor-style = block
 # ssh-env: fall back to TERM=xterm-256color where that isn't possible.
 shell-integration-features = no-cursor,ssh-terminfo,ssh-env
 
-# Meslo Nerd Font from the Brewfile (font-meslo-lg-nerd-font); LGS = small
-# line gap, the variant powerlevel10k is designed for.
-font-family = MesloLGS Nerd Font Mono
+# JetBrains Mono ships with Ghostty (also its default; set explicitly so the
+# choice is visible). Nerd Font icons come from Ghostty's built-in fallback.
+font-family = JetBrains Mono
 
 # Left Option acts as Alt (fzf Alt-C, zsh Alt-B/F word jumps); right Option
 # still types special characters like ç and ∫.
