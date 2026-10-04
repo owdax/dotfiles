@@ -39,6 +39,16 @@ fi
 section "General UI/UX"
 ###############################################################################
 
+# Optional, per machine: computer name, language/region, timezone.
+# sudo scutil --set ComputerName "my-mac"
+# sudo scutil --set HostName "my-mac"
+# sudo scutil --set LocalHostName "my-mac"
+# defaults write NSGlobalDomain AppleLanguages -array "en"
+# defaults write NSGlobalDomain AppleLocale -string "en_US@currency=USD"
+# defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+# defaults write NSGlobalDomain AppleMetricUnits -bool true
+# sudo systemsetup -settimezone "Europe/Berlin"   # list: sudo systemsetup -listtimezones
+
 # Mute the startup chime (Apple Silicon: StartupMute replaced SystemAudioVolume).
 run sudo nvram StartupMute=%01
 
@@ -91,6 +101,9 @@ pm() { # pm <-a|-b|-c> <setting> <value>
     echo "  skip: pmset $2 not supported on this Mac"
   fi
 }
+
+# Restart automatically if the system freezes.
+run sudo systemsetup -setrestartfreeze on
 
 if pmset -g batt | grep -q InternalBattery; then
   echo "  laptop profile"
