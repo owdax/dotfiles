@@ -53,8 +53,24 @@
 # # Copy Ghostty's terminfo entry to the remote machine. The easiest way is using the following # # one-liner:
 # infocmp -x xterm-ghostty | ssh YOUR-SERVER -- tic -x -
 cursor-style = block
-shell-integration-features = no-cursor
-# Hidden titlebar for yabai tiling (was "tabs" under AeroSpace for native tabs).
+# no-cursor: keep the block cursor at the prompt.
+# ssh-terminfo: install Ghostty's terminfo on remote hosts on first connect
+#   (replaces the manual infocmp | tic one-liner above).
+# ssh-env: fall back to TERM=xterm-256color where that isn't possible.
+shell-integration-features = no-cursor,ssh-terminfo,ssh-env
+
+# Meslo Nerd Font from the Brewfile (font-meslo-lg-nerd-font); LGS = small
+# line gap, the variant powerlevel10k is designed for.
+font-family = MesloLGS Nerd Font Mono
+
+# Left Option acts as Alt (fzf Alt-C, zsh Alt-B/F word jumps); right Option
+# still types special characters like ç and ∫.
+macos-option-as-alt = left
+
+# Restore windows, tabs and working directories on relaunch.
+window-save-state = always
+
+# Hidden titlebar for AeroSpace tiling (was "tabs" for native tabs).
 # Drag windows with option+click on the frame; top-edge dragging is gone.
 macos-titlebar-style = hidden
 theme = 0x96f
