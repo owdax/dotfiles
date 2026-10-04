@@ -91,7 +91,7 @@ cask 'rustdesk'
 cask 'obsidian'
 
 # Fonts
-cask 'font-meslo-lg-nerd-font'
+cask 'font-jetbrains-mono-nerd-font'
 cask 'font-lato'
 cask 'font-open-sans'
 cask 'font-roboto'
