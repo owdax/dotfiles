@@ -32,8 +32,12 @@ LINKS=(
   "yazi/yazi.toml|$HOME/.config/yazi/yazi.toml"
   "mise/config.toml|$HOME/.config/mise/config.toml"
   "ghostty/config|$APP_SUPPORT/com.mitchellh.ghostty/config"
+  # Ghostty bundles an older 0x96f palette; a theme here shadows it, one in
+  # Application Support does not.
+  "ghostty/themes/0x96f|$HOME/.config/ghostty/themes/0x96f"
   "lazygit/config.yml|$APP_SUPPORT/lazygit/config.yml"
   "claude/statusline.sh|$HOME/.claude/statusline.sh"
+  "claude/themes/0x96f.json|$HOME/.claude/themes/0x96f.json"
 )
 
 run() {

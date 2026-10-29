@@ -7,37 +7,35 @@ onboarding = false
 
 [theme]
 # 0x96f is not a built-in herdr theme, so it is ported below as token
-# overrides. catppuccin is the base because herdr's token vocabulary
-# (surface0/overlay0/mauve/peach/teal) is modeled on it, so anything not
-# overridable lands closest to the intended shape.
-# Was "terminal" (follow Ghostty's ANSI palette) — restore that to undo.
-name = "tokyo-night"
+# overrides. "terminal" is the base so any token not overridden follows
+# Ghostty's ANSI palette, which is 0x96f too (ghostty/themes/0x96f).
+name = "terminal"
 auto_switch = false
 
-# 0x96f, ported from Ghostty's bundled theme:
-# /Applications/Ghostty.app/Contents/Resources/ghostty/themes/0x96f
+# 0x96f, from upstream: https://github.com/0x96f-org/0x96f-term-theme
+# Ghostty's bundled copy is an older palette; ghostty/themes/0x96f shadows it.
 [theme.custom]
 # Direct from the palette.
 panel_bg = "#262427"   # background
 text     = "#fcfcfa"   # foreground
-red      = "#ff666d"   # palette 1
-green    = "#b3e03a"   # palette 2
-yellow   = "#ffc739"   # palette 3
-blue     = "#00cde8"   # palette 4
-mauve    = "#a392e8"   # palette 5  (magenta)
-teal     = "#9deaf6"   # palette 6  (cyan)
+red      = "#ff7272"   # palette 1
+green    = "#bcdf59"   # palette 2
+yellow   = "#ffca58"   # palette 3
+blue     = "#49cae4"   # palette 4
+mauve    = "#a093e2"   # palette 5  (magenta)
+teal     = "#aee8f4"   # palette 6  (cyan)
 overlay0 = "#545452"   # palette 8  (bright black)
-accent   = "#00cde8"   # the scheme's signature cyan
+accent   = "#49cae4"   # the scheme's signature cyan
 
-# Derived — 0x96f is a 16-color ANSI scheme and has no slot for these UI
-# roles. Each is mixed from palette colors, not invented from scratch.
-surface_dim = "#1c1a1d"  # one step under panel_bg
-surface0    = "#322f33"  # raised panel
-surface1    = "#3f3b40"  # raised panel, one step further
-overlay1    = "#6e6e6c"  # overlay0 lightened
-subtext0    = "#abaaaa"  # text/panel_bg blend; palette 8 is too dark to read here
-peach       = "#ff9653"  # red+yellow mix; 0x96f has no orange, and reusing
-                         # bright yellow/red would collide with warn/error
+# 0x96f is a 16-color ANSI scheme with no slot for these UI roles; they come
+# from the 0x96f VS Code theme, which defines them.
+surface_dim = "#1c1b1c"
+surface0    = "#322e32"
+surface1    = "#454045"
+overlay1    = "#686368"
+subtext0    = "#a6a6a5"
+peach       = "#fc9d6f"
+sidebar_bg  = "#1e1e1e"  # VS Code theme's sideBar.background
 
 [keys]
 # tmux: set -g prefix C-a

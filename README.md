@@ -32,8 +32,10 @@ and anything in the way is moved to `~/.dotfiles-backup-<timestamp>/`.
 | `herdr/config.toml` | `~/.config/herdr/config.toml` |
 | `yazi/yazi.toml` | `~/.config/yazi/yazi.toml` |
 | `ghostty/config` | `~/Library/Application Support/com.mitchellh.ghostty/config` |
+| `ghostty/themes/0x96f` | `~/.config/ghostty/themes/0x96f` |
 | `lazygit/config.yml` | `~/Library/Application Support/lazygit/config.yml` |
 | `claude/statusline.sh` | `~/.claude/statusline.sh` |
+| `claude/themes/0x96f.json` | `~/.claude/themes/0x96f.json` |
 
 To add a config, put it in the repo and add a line to `LINKS` in `install.sh`.
 
@@ -55,6 +57,15 @@ Needs `jq` and a Nerd Font (both in the Brewfile). Add to `~/.claude/settings.js
 ```json
 "statusLine": { "type": "command", "command": "~/.claude/statusline.sh" }
 ```
+
+### 0x96f theme
+Ghostty, herdr, Neovim and Claude Code all use [0x96f](https://github.com/0x96f-org).
+`ghostty/themes/0x96f` is the upstream palette; it shadows the older copy bundled with Ghostty.
+In Claude Code, run `/theme` once and pick **0x96f**.
+
+The Claude Code theme's `base` is `dark-daltonized` on purpose. Claude Code colors inline
+code from the base preset and ignores the override, so `dark` leaves it periwinkle, and
+`dark-ansi` turns diffs gray.
 
 ### macOS Settings
 ```bash
